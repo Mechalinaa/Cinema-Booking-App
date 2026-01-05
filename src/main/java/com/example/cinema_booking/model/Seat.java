@@ -12,8 +12,11 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
     private int rowNum;
+
     private int seatNum;
+
     @ManyToOne
     @JoinColumn(name = "room_id") //wiele siedzen ma jedna sale
     private Room room;

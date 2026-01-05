@@ -14,9 +14,13 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
     private String name;
+
     private int rows;
+
     private int seatsPerRow;
+
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL) //jedna sala ma wiele siedzen
     private List<Seat> seats;
 }
