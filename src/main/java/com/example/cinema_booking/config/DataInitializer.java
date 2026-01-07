@@ -35,20 +35,37 @@ public class DataInitializer {
             Room r2 = roomService.save(Room.builder().name("Sala 2").rows(4).seatsPerRow(5).build());
 
             // === 3. Miejsca w salach ===
+
+            // Sala 1
             List<Seat> seatsR1 = new ArrayList<>();
             for (int row = 1; row <= r1.getRows(); row++) {
                 for (int num = 1; num <= r1.getSeatsPerRow(); num++) {
-                    Seat seat = seatService.save(Seat.builder().rowNum(row).seatNum(num).room(r1).build());
+                    Seat seat = seatService.save(
+                            Seat.builder()
+                                    .rowNum(row)          // numer rzędu od 1
+                                    .seatNum(num)         // numer miejsca od 1
+                                    .reserved(false)      // domyślnie wolne
+                                    .room(r1)
+                                    .build()
+                    );
                     seatsR1.add(seat);
                 }
             }
             r1.setSeats(seatsR1);
             roomService.save(r1); // aktualizujemy relację dwustronną
 
+            // Sala 2
             List<Seat> seatsR2 = new ArrayList<>();
             for (int row = 1; row <= r2.getRows(); row++) {
                 for (int num = 1; num <= r2.getSeatsPerRow(); num++) {
-                    Seat seat = seatService.save(Seat.builder().rowNum(row).seatNum(num).room(r2).build());
+                    Seat seat = seatService.save(
+                            Seat.builder()
+                                    .rowNum(row)
+                                    .seatNum(num)
+                                    .reserved(false)
+                                    .room(r2)
+                                    .build()
+                    );
                     seatsR2.add(seat);
                 }
             }

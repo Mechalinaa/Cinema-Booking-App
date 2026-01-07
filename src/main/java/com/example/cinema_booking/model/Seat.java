@@ -19,6 +19,8 @@ public class Seat {
 
     private int seatNum;
 
+    private boolean reserved;
+
     @ManyToOne
     @JoinColumn(name = "room_id") //wiele siedzen ma jedna sale
     private Room room;
