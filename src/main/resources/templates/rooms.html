@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sale kinowe</title>
+</head>
+<body>
+    <h1>Sale kinowe</h1>
+    <ul>
+        <li th:each="room : ${rooms}">
+            <strong th:text="${room.name}"></strong>
+            (Rzędy: <span th:text="${room.rows}"></span>, Miejsca na rząd: <span th:text="${room.seatsPerRow}"></span>)
+        </li>
+    </ul>
+</body>
+</html>

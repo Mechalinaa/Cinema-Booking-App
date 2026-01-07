@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seanse</title>
+</head>
+<body>
+    <h1>Seanse</h1>
+    <ul>
+        <li th:each="show : ${shows}">
+            Film: <span th:text="${show.movie.title}"></span> -
+            Sala: <span th:text="${show.room.name}"></span> -
+            Godzina: <span th:text="${#temporals.format(show.startTime,'yyyy-MM-dd HH:mm')}"></span>
+        </li>
+    </ul>
+</body>
+</html>

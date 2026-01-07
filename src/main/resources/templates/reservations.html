@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezerwacje</title>
+</head>
+<body>
+    <h1>Rezerwacje</h1>
+    <ul>
+        <li th:each="res : ${reservations}">
+            Ticket ID: <span th:text="${res.ticketId}"></span> -
+            Film: <span th:text="${res.show.movie.title}"></span> -
+            Sala: <span th:text="${res.show.room.name}"></span> -
+            Miejsca:
+            <span th:each="seat : ${res.seats}" th:text="${seat.rowNum} + '-' + ${seat.seatNum} + ' '"></span>
+        </li>
+    </ul>
+</body>
+</html>
