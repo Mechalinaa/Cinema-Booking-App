@@ -1,4 +1,4 @@
-package com.example.cinema_booking.controller;
+package com.example.cinema_booking.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

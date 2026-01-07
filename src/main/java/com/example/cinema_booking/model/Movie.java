@@ -1,12 +1,14 @@
 package com.example.cinema_booking.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE) //tylko dla buildera
+@Entity
 @Table(name = "Filmy")
 public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<body>
+    <h1>Filmy w kinie</h1>
+    <ul>
+        <li th:each="movie : ${movies}">
+            <span th:text="${movie.title}"></span>
+            (<span th:text="${movie.genre}"></span>) -
+            <span th:text="${movie.durationInMinutes}"></span> min
+        </li>
+    </ul>
+</body>
+</html>
