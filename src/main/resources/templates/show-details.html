@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title th:text="${show.movie.title} + ' - Szczegóły'">Szczegóły seansu</title>
     <link rel="stylesheet" th:href="@{/css/show-details.css}" />
+
+    <!-- CSRF token dla JS -->
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
-<body>
+<body th:attr="data-show-id=${show.id}">
 <h1 th:text="${show.movie.title}">Tytuł filmu</h1>
 
 <p>
@@ -22,14 +26,14 @@
         <div th:each="seat : ${row}"
              th:class="'seat ' + (${seat.reserved} ? 'taken' : 'available')"
              th:text="${seat.seatNum}"
-             th:attr="data-row=${seat.rowNum}, data-seat=${seat.seatNum}"
-             th:onclick="!${seat.reserved} ? 'toggleSeat(this)' : ''">
+             th:attr="data-row=${seat.rowNum}, data-seat=${seat.seatNum}">
         </div>
     </div>
 </div>
 
 <h3>Wybrane miejsca:</h3>
 <ul id="selectedSeats"></ul>
+<button id="addToCartBtn">Dodaj do koszyka</button>
 
 <script th:src="@{/js/show-details.js}"></script>
 <a href="/shows">Powrót do listy seansów</a>
