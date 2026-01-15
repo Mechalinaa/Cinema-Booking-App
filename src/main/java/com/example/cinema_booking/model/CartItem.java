@@ -1,4 +1,4 @@
-package com.example.cinema_booking.cart;
+package com.example.cinema_booking.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

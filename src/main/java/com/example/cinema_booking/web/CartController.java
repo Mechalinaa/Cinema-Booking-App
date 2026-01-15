@@ -1,7 +1,7 @@
 package com.example.cinema_booking.web;
 
-import com.example.cinema_booking.cart.Cart;
-import com.example.cinema_booking.cart.CartItem;
+import com.example.cinema_booking.model.Cart;
+import com.example.cinema_booking.model.CartItem;
 import com.example.cinema_booking.dto.SeatSelectionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

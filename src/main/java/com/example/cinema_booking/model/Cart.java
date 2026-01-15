@@ -1,4 +1,4 @@
-package com.example.cinema_booking.cart;
+package com.example.cinema_booking.model;
 
 import java.util.HashSet;
 import java.util.Set;

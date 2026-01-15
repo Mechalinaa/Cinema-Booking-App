@@ -1,5 +1,7 @@
-package com.example.cinema_booking.cart;
+package com.example.cinema_booking.service;
 
+import com.example.cinema_booking.model.Cart;
+import com.example.cinema_booking.model.CartItem;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
