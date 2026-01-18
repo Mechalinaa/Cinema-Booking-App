@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuń Film</title>
+</head>
+<body>
+<h1>Wybierz film do usunięcia</h1>
+<ul>
+    <li th:each="movie : ${movies}">
+        <span th:text="${movie.title} + ' (' + movie.genre + ')'"></span>
+        <a th:href="@{'/admin/deleteMovie/' + ${movie.id}}">Usuń</a>
+    </li>
+</ul>
+<a th:href="@{/movies}">← Powrót do listy filmów</a>
+</body>
+</html>

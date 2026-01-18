@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuń seans</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Usuń seans</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Film</th>
+        <th>Sala</th>
+        <th>Data i godzina</th>
+        <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="showtime : ${showtimes}">
+        <td th:text="${showtime.movie.title}">Film</td>
+        <td th:text="${showtime.room.name}">Sala</td>
+        <td th:text="${#temporals.format(showtime.startTime, 'yyyy-MM-dd HH:mm')}">
+            Data
+        </td>
+        <td>
+            <a th:href="@{'/admin/deleteShowtime/' + ${showtime.id}}"
+               onclick="return confirm('Na pewno usunąć ten seans?');">
+                Usuń
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/showtimes}">← Powrót do listy seansów</a>
+
+</body>
+</html>

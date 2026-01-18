@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Podsumowanie rezerwacji</title>
+    <link rel="stylesheet" th:href="@{/css/reservation-summary.css}" />
+</head>
+<body>
+
+<h1>Podsumowanie rezerwacji</h1>
+
+<section class="card" th:if="${reservation != null}">
+    <p>
+        <strong>ID rezerwacji:</strong>
+        <span th:text="${reservation.id}">id</span>
+    </p>
+
+    <p>
+        <strong>Film:</strong>
+        <span th:text="${reservation.movieName}">movie</span>
+    </p>
+
+    <p>
+        <strong>Seans:</strong>
+        <span th:text="${#temporals.format(reservation.startTime, 'dd-MM-yyyy HH:mm')}">startTime</span>
+    </p>
+
+    <h2>Zarezerwowane miejsca</h2>
+
+    <div th:if="${reservation.seats != null and !reservation.seats.isEmpty()}">
+        <ul>
+            <li th:each="seatId : ${reservation.seats}"
+                th:text="${seatId}">
+                seat-id
+            </li>
+        </ul>
+        <p class="hint">Powyżej: identyfikatory miejsc (UUID).</p>
+    </div>
+
+    <div th:if="${reservation.seats == null or reservation.seats.isEmpty()}">
+        <p>Brak wybranych miejsc.</p>
+    </div>
+
+    <div class="actions">
+        <a th:href="@{/showtimes}">Wróć do listy seansów</a>
+    </div>
+</section>
+
+<section th:if="${reservation == null}">
+    <p>Nie znaleziono rezerwacji.</p>
+    <a th:href="@{/showtimes}">Wróć</a>
+</section>
+
+</body>
+</html>

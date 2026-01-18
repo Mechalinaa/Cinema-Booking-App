@@ -5,13 +5,64 @@
     <title>Movies</title>
 </head>
 <body>
-    <h1>Filmy w kinie</h1>
-    <ul>
-        <li th:each="movie : ${movies}">
+<h1>Filmy w kinie</h1>
+
+<ul>
+    <li th:each="movie : ${movies}">
+        <h3>
             <span th:text="${movie.title}"></span>
-            (<span th:text="${movie.genre}"></span>) -
+            <small>
+                (<span th:text="${movie.genre}"></span>)
+            </small>
+        </h3>
+
+        <div>
+            <strong>Czas trwania:</strong>
             <span th:text="${movie.durationInMinutes}"></span> min
-        </li>
-    </ul>
+            &nbsp;|&nbsp;
+            <strong>Reżyser:</strong>
+            <span th:text="${movie.director}"></span>
+            &nbsp;|&nbsp;
+            <strong>Ograniczenie wiekowe:</strong>
+            <span th:text="${movie.ageRestriction}"></span>+
+        </div>
+
+        <p th:text="${movie.description}"></p>
+
+        <!-- Actors -->
+        <div th:if="${movie.actors != null and !#lists.isEmpty(movie.actors)}">
+            <strong>Obsada:</strong>
+            <ul>
+                <li th:each="actor : ${movie.actors}">
+                    <span th:text="${actor}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Trailers -->
+        <div th:if="${movie.trailers != null and !#lists.isEmpty(movie.trailers)}">
+            <strong>Trailery:</strong>
+            <ul>
+                <li th:each="trailer : ${movie.trailers}">
+                    <a th:href="${trailer}" th:text="${trailer}" target="_blank" rel="noopener noreferrer"></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Gallery -->
+        <div th:if="${movie.gallery != null and !#lists.isEmpty(movie.gallery)}">
+            <strong>Galeria:</strong>
+            <div>
+                <img th:each="imgUrl : ${movie.gallery}"
+                     th:src="${imgUrl}"
+                     th:alt="|Zdjęcie z filmu: ${movie.title}|"
+                     style="max-width: 220px; height: auto; margin: 6px 6px 0 0; border: 1px solid #ddd;">
+            </div>
+        </div>
+
+        <hr>
+    </li>
+</ul>
+<a href="/">Powrót do strony głównej</a>
 </body>
 </html>

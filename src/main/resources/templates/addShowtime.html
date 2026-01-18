@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Seans</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Dodaj nowy seans</h1>
+
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+<form th:action="@{/admin/addShowtime}" th:object="${showtime}" method="post">
+    <div>
+        <label for="movie">Film:</label>
+        <select id="movie" th:field="*{movie}" required>
+            <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.title}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="room">Sala:</label>
+        <select id="room" th:field="*{room}" required>
+            <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="startTime">Data i godzina startu:</label>
+        <input type="datetime-local" id="startTime" th:field="*{startTime}" required/>
+    </div>
+
+    <div>
+        <button type="submit">Dodaj seans</button>
+    </div>
+</form>
+</body>
+</html>

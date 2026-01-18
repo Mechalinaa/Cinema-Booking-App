@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Film</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Dodaj nowy film</h1>
+
+<form th:action="@{/admin/addMovie}" th:object="${movie}" method="post">
+    <div>
+        <label for="title">Tytuł:</label>
+        <input type="text" id="title" th:field="*{title}" required/>
+    </div>
+
+    <div>
+        <label for="genre">Gatunek:</label>
+        <input type="text" id="genre" th:field="*{genre}" required/>
+    </div>
+
+    <div>
+        <label for="ageRestriction">Ograniczenie wiekowe:</label>
+        <input type="number" id="ageRestriction" th:field="*{ageRestriction}" min="0" required/>
+    </div>
+
+    <div>
+        <label for="description">Opis:</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
+    </div>
+
+    <div>
+        <label for="director">Reżyser:</label>
+        <input type="text" id="director" th:field="*{director}" required/>
+    </div>
+
+    <div>
+        <button type="submit">Dodaj film</button>
+    </div>
+</form>
+
+</body>
+</html>

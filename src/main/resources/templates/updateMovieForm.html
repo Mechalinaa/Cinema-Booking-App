@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj Film</title>
+</head>
+<body>
+<h1>Edytuj film</h1>
+
+<form th:action="@{/admin/updateMovie}" th:object="${movie}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div>
+        <label>Tytuł:</label>
+        <input type="text" th:field="*{title}" required/>
+    </div>
+
+    <div>
+        <label>Gatunek:</label>
+        <input type="text" th:field="*{genre}" required/>
+    </div>
+
+    <div>
+        <label>Ograniczenie wiekowe:</label>
+        <input type="number" th:field="*{ageRestriction}" min="0" required/>
+    </div>
+
+    <div>
+        <label>Opis:</label>
+        <textarea th:field="*{description}" required></textarea>
+    </div>
+
+    <div>
+        <label>Reżyser:</label>
+        <input type="text" th:field="*{director}" required/>
+    </div>
+
+    <div>
+        <button type="submit">Zapisz zmiany</button>
+    </div>
+</form>
+</body>
+</html>

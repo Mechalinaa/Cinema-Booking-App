@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Seanse</title>
+</head>
+<body>
+<h1>Dostępne seanse</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Film</th>
+        <th>Sala</th>
+        <th>Data i godzina</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="show : ${showtimes}">
+        <td th:text="${show.movie.title}">Tytuł filmu</td>
+        <td th:text="${show.room.name}">Sala</td>
+        <td th:text="${#temporals.format(show.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td><a th:href="@{/showtimes/{id}(id=${show.id})}">Kup</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/">Powrót do strony głównej</a>
+</body>
+</html>
