@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle} ?: 'Sigma Cinema'">Sigma Cinema</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header>Sigma Cinema</header>
+
+<div class="sidebar">
+    <ul>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/movies">Filmy</a></li>
+        <li><a href="/showtimes">Seanse</a></li>
+        <li><a href="/admin">Admin</a></li>
+    </ul>
+</div>
+
+<main>
+    <div th:replace="${content}"></div>
+</main>
+
+<footer>Michalina Łeńska</footer>
+
+</body>
+</html>

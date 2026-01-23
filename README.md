@@ -7,10 +7,8 @@ Konteneryzacja (Docker) Przygotowanie Dockerfile dla aplikacji oraz docker-compo
 
 Dla ciebie:
 
-Dodać zdjęcia z filmów do resources i je realnie wyświetlać
-Dodać odtwarzacz yt, zamiast zwykłego linka
 Strona Powitalna i Repertuar
-Ekran startowy z banerem reklamowym (karuzela lub statyczny obraz). 
+Ekran startowy z banerem reklamowym (karuzela lub statyczny obraz). //super rozowa grafika
 Moduł repertuaru umożliwiający wybór daty (kalendarz/zakładki dni).
 Wyświetlanie listy filmów dostępnych w wybranym dniu wraz z godzinami seansów.
 
@@ -19,4 +17,4 @@ Po wybraniu miejsca użytkownik wybiera typ biletu (Normalny/Ulgowy/Rodzinny), c
 Koszyk sesyjny umożliwiający podgląd wybranych miejsc, zmianę typu biletu lub usunięcie miejsca z rezerwacji przed płatnością.
 6%
 
-następnie Testy integracyjne i jednostkowe
+następnie Testy integracyjne i jednostkowe i pokrycie kodu jacoco

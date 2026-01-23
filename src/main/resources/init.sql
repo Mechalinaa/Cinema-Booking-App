@@ -26,14 +26,14 @@ INSERT INTO movie_trailers (movie_id, trailers) VALUES
 
 -- Gallery (ElementCollection: movie_gallery)
 INSERT INTO movie_gallery (movie_id, gallery) VALUES
-                                                  ('11111111-1111-1111-1111-111111111111', 'https://example.com/interstellar/poster.jpg'),
-                                                  ('11111111-1111-1111-1111-111111111111', 'https://example.com/interstellar/still-1.jpg'),
+                                                  ('11111111-1111-1111-1111-111111111111', 'https://image.tmdb.org/t/p/w500/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg'),
+                                                  ('11111111-1111-1111-1111-111111111111', 'https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg'),
 
-                                                  ('22222222-2222-2222-2222-222222222222', 'https://example.com/inception/poster.jpg'),
-                                                  ('22222222-2222-2222-2222-222222222222', 'https://example.com/inception/still-1.jpg'),
+                                                  ('22222222-2222-2222-2222-222222222222', 'https://image.tmdb.org/t/p/original/lvHNQSGdjxyW2n0rYCqb40NuCh4.jpg'),
+                                                  ('22222222-2222-2222-2222-222222222222', 'https://image.tmdb.org/t/p/original/iDqeLorp5WBynVaRFqMbMgD7buu.jpg'),
 
-                                                  ('33333333-3333-3333-3333-333333333333', 'https://example.com/dark-knight/poster.jpg'),
-                                                  ('33333333-3333-3333-3333-333333333333', 'https://example.com/dark-knight/still-1.jpg');
+                                                  ('33333333-3333-3333-3333-333333333333', 'https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg'),
+                                                  ('33333333-3333-3333-3333-333333333333', 'https://image.tmdb.org/t/p/original/plDp52MirFHc2PMJRMNWoG0kfr3.jpg');
 
 -- Rooms
 INSERT INTO room (id, name) VALUES

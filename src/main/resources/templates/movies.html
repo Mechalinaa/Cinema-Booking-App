@@ -41,20 +41,25 @@
 
         <!-- Trailers -->
         <div th:if="${movie.trailers != null and !#lists.isEmpty(movie.trailers)}">
-            <strong>Trailery:</strong>
-            <ul>
-                <li th:each="trailer : ${movie.trailers}">
-                    <a th:href="${trailer}" th:text="${trailer}" target="_blank" rel="noopener noreferrer"></a>
-                </li>
-            </ul>
+            <strong>Trailer:</strong>
+            <div th:each="trailer : ${movie.trailers}">
+                <iframe width="560" height="315"
+                        th:src="'https://www.youtube.com/embed/' + ${#strings.substring(trailer, trailer.indexOf('v=') + 2)}"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
         </div>
+
 
         <!-- Gallery -->
         <div th:if="${movie.gallery != null and !#lists.isEmpty(movie.gallery)}">
             <strong>Galeria:</strong>
             <div>
                 <img th:each="imgUrl : ${movie.gallery}"
-                     th:src="${imgUrl}"
+                     th:src="@{${imgUrl}}"
                      th:alt="|Zdjęcie z filmu: ${movie.title}|"
                      style="max-width: 220px; height: auto; margin: 6px 6px 0 0; border: 1px solid #ddd;">
             </div>
