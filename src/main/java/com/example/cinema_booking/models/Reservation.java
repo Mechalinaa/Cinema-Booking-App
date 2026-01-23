@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Reservation {
+
     @Id
     @UuidGenerator
     @GeneratedValue
@@ -26,4 +28,7 @@ public class Reservation {
 
     @Column(nullable = false)
     private LocalDateTime startTime;
+
+    @Column(nullable = false)
+    private BigDecimal totalPrice;
 }

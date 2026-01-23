@@ -99,9 +99,9 @@ INSERT INTO showtime (id, movie_id, room_id, start_time) VALUES
                                                              ('99999999-0000-0000-0000-000000000003', '22222222-2222-2222-2222-222222222222', 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '2026-01-17 19:15:00');
 
 -- Reservations
-INSERT INTO reservation (id, movie_name, start_time) VALUES
-                                                         ('44444444-4444-4444-4444-444444444444', 'Interstellar', TIMESTAMP '2026-01-17 18:00:00'),
-                                                         ('55555555-5555-5555-5555-555555555555', 'Inception',    TIMESTAMP '2026-01-18 19:15:00');
+INSERT INTO reservation (id, movie_name, start_time, total_price) VALUES
+                                                                      ('44444444-4444-4444-4444-444444444444', 'Interstellar', TIMESTAMP '2026-01-17 18:00:00', 40.00),
+                                                                      ('55555555-5555-5555-5555-555555555555', 'Inception',    TIMESTAMP '2026-01-18 19:15:00', 20.00);
 
 INSERT INTO reservation_seats (reservation_id, seats) VALUES
                                                           ('44444444-4444-4444-4444-444444444444', 'a0000000-0000-0000-0000-000000000006'),

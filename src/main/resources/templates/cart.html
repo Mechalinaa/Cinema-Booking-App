@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Koszyk</title>
+    <link rel="stylesheet" th:href="@{/css/show-details.css}" />
+</head>
+<body>
+
+<h1>Koszyk</h1>
+
+<div th:if="${cart == null || cart.items.isEmpty()}">
+    <p>Koszyk jest pusty</p>
+</div>
+
+<div th:if="${cart != null && !cart.items.isEmpty()}">
+
+    <table>
+        <tr>
+            <th>Miejsce</th>
+            <th>Typ biletu</th>
+            <th>Cena</th>
+            <th>Akcje</th>
+        </tr>
+
+        <tr th:each="item : ${cart.items}">
+            <td th:text="'Rząd ' + ${item.rowNum} + ', Miejsce ' + ${item.seatNum}"></td>
+
+            <td>
+                <form th:action="@{/cart/updateTicket}" method="post">
+                    <input type="hidden" name="seatId" th:value="${item.seatId}" />
+
+                    <select name="ticketType" onchange="this.form.submit()">
+                        <option th:each="t : ${types}"
+                                th:value="${t}"
+                                th:text="${t}"
+                                th:selected="${t == item.ticketType}">
+                        </option>
+                    </select>
+                </form>
+            </td>
+
+            <td th:text="${item.price} + ' zł'"></td>
+
+            <td>
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="seatId" th:value="${item.seatId}" />
+                    <button type="submit">Usuń</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Suma: <span th:text="${cart.totalPrice} + ' zł'"></span></h3>
+
+    <form th:action="@{/cart/confirm}" method="post">
+        <button type="submit">Potwierdź rezerwację</button>
+    </form>
+
+</div>
+
+</body>
+</html>

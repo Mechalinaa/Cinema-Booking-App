@@ -24,14 +24,4 @@ public class ReservationViewController {
         model.addAttribute("reservation", reservation);
         return "reservation";
     }
-
-    @PostMapping("/showtimes/{id}/reservation")
-    public String addReservation(@PathVariable UUID id,
-                                 @RequestParam(name = "seatIds") List<UUID> seatIds,
-                                 Model model) {
-
-        Reservation reservation = reservationService.addNewReservation(id, seatIds);
-        model.addAttribute("reservations", reservation);
-        return "redirect:/reservation/" + reservation.getId();
-    }
 }
