@@ -16,5 +16,8 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, UUID> {
         return findById(id).orElseThrow(EntityNotFoundException::new);
     }
     List<Showtime> findByRoom(Room room);
-    List<Showtime> findByMovieId(UUID movieId);
+    List<Showtime> findByStartTimeBetween(
+            LocalDateTime start,
+            LocalDateTime end
+    );
 }

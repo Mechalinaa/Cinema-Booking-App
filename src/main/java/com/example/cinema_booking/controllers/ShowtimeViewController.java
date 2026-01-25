@@ -48,38 +48,4 @@ public class ShowtimeViewController {
         model.addAttribute("seatsByRow", seatsByRow);
         return "show-details";
     }
-
-    @GetMapping("/admin/addShowtime")
-    public String addShowtimeForm(Model model) {
-        model.addAttribute("showtime", new Showtime());
-        model.addAttribute("movies", movieService.findAll());
-        model.addAttribute("rooms", roomService.findAll());
-        return "addShowtime";
-    }
-
-    @PostMapping("/admin/addShowtime")
-    public String saveShowtime(@ModelAttribute("showtime") Showtime showtime, Model model) {
-        try {
-            showtimeService.save(showtime);
-            return "redirect:/showtimes";
-        }
-        catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("movies", movieService.findAll());
-            model.addAttribute("rooms", roomService.findAll());
-            return "addShowtime";
-        }
-    }
-
-    @GetMapping("/admin/deleteShowtime")
-    public String showtimeList(Model model) {
-        model.addAttribute("showtimes", showtimeService.findAll());
-        return "deleteShowtimeList";
-    }
-
-    @GetMapping("/admin/deleteShowtime/{id}")
-    public String deleteShowtime(@PathVariable UUID id) {
-        showtimeService.deleteById(id);
-        return "redirect:/showtimes";
-    }
 }

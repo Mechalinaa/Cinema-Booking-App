@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Sigma Cinema</title>
-    <style>
-        img {
-            padding: 0;
-            margin: 0;
-            height: 500px;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <img th:src="@{images/banner.png}" alt="banner">
-    </header>
+
+<header>
+    <img th:src="@{/images/banner.png}" alt="banner" style="height: 400px">
+</header>
+
+<nav>
+    <a href="/movies">Filmy</a>
+    <a href="/showtimes">Wszystkie seanse</a>
+    <a href="/admin">Admin</a>
+</nav>
+
+<hr>
+
+<h2>Repertuar</h2>
+
+<div>
+    <a th:href="@{/(date=${selectedDate.minusDays(1)})}">←</a>
+
+    <strong th:text="${selectedDate}"></strong>
+
+    <a th:href="@{/(date=${selectedDate.plusDays(1)})}">→</a>
+</div>
+
+<hr>
+
+<div th:if="${#maps.isEmpty(repertoire)}">
+    <p>Brak seansów w tym dniu</p>
+</div>
+
+<div th:each="entry : ${repertoire}">
+    <h3 th:text="${entry.key.title}">Tytuł filmu</h3>
+    <p th:text="${entry.key.genre}"></p>
+
     <div>
-        <ul>
-            <li>
-                <a href="/admin">Admin Panel</a>
-            </li>
-            <li>
-                <a href="/movies">Filmy</a>
-            </li>
-            <li>
-                <a href="/showtimes">Seanse</a>
-            </li>
-        </ul>
+        <span th:each="show : ${entry.value}">
+            <a th:href="@{/showtimes/{id}(id=${show.id})}">
+                <span th:text="${#temporals.format(show.startTime, 'HH:mm')}"></span>
+            </a>
+            &nbsp;
+        </span>
     </div>
+
+    <hr>
+</div>
+
 </body>
 </html>
