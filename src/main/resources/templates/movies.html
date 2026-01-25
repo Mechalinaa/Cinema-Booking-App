@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Movies</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 <h1>Filmy w kinie</h1>
 
@@ -39,7 +37,6 @@
             </ul>
         </div>
 
-        <!-- Trailers -->
         <div th:if="${movie.trailers != null and !#lists.isEmpty(movie.trailers)}">
             <strong>Trailer:</strong>
             <div th:each="trailer : ${movie.trailers}">
@@ -54,7 +51,6 @@
         </div>
 
 
-        <!-- Gallery -->
         <div th:if="${movie.gallery != null and !#lists.isEmpty(movie.gallery)}">
             <strong>Galeria:</strong>
             <div>
@@ -68,6 +64,5 @@
         <hr>
     </li>
 </ul>
-<a href="/">Powrót do strony głównej</a>
 </body>
 </html>

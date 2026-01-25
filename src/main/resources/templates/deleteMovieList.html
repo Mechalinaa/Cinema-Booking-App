@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Usuń Film</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 <h1>Wybierz film do usunięcia</h1>
 <ul>
@@ -12,6 +10,7 @@
         <a th:href="@{'/admin/deleteMovie/' + ${movie.id}}">Usuń</a>
     </li>
 </ul>
-<a th:href="@{/movies}">← Powrót do listy filmów</a>
+<br>
+<a th:href="@{/admin}">← Powrót</a>
 </body>
 </html>

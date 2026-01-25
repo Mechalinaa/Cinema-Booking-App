@@ -21,18 +21,19 @@ public class AdminController {
     private final ShowtimeService showtimeService;
 
     @GetMapping()
-    public String admin(){
+    public String admin(Model model){
+        model.addAttribute("pageTitle", "Admin");
         return "admin";
     }
 
     @GetMapping("/addMovie")
-    public String addMovieForm(@ModelAttribute("movie") Movie movie) {
+    public String addMovieForm(@ModelAttribute("movie") Movie movie, Model model) {
+        model.addAttribute("pageTitle", "Dodaj film");
         return "addMovie";
     }
 
     @PostMapping("/addMovie")
     public String addMovieSubmit(@ModelAttribute Movie movie) {
-
         movieService.save(movie);
         return "redirect:/movies";
     }
@@ -40,6 +41,7 @@ public class AdminController {
     @GetMapping("/updateMovie")
     public String updateMovie(Model model){
         model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("pageTitle", "Zakualizuj film");
         return "updateMovieList";
     }
 
@@ -47,6 +49,7 @@ public class AdminController {
     public String editMovieForm(@PathVariable UUID id, Model model) {
         Movie movie = movieService.findById(id);
         model.addAttribute("movie", movie);
+        model.addAttribute("pageTitle", "Edytuj: " + movie.getTitle());
         return "updateMovieForm";
     }
 
@@ -65,6 +68,7 @@ public class AdminController {
     @GetMapping("/deleteMovie")
     public String deleteMovie(Model model){
         model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("pageTitle", "Usuń film");
         return "deleteMovieList";
     }
 
@@ -79,6 +83,7 @@ public class AdminController {
         model.addAttribute("showtime", new Showtime());
         model.addAttribute("movies", movieService.findAll());
         model.addAttribute("rooms", roomService.findAll());
+        model.addAttribute("pageTitle", "Dodaj seans");
         return "addShowtime";
     }
 
@@ -92,6 +97,7 @@ public class AdminController {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("movies", movieService.findAll());
             model.addAttribute("rooms", roomService.findAll());
+            model.addAttribute("pageTitle", "Dodaj seans");
             return "addShowtime";
         }
     }
@@ -99,6 +105,7 @@ public class AdminController {
     @GetMapping("/deleteShowtime")
     public String showtimeList(Model model) {
         model.addAttribute("showtimes", showtimeService.findAll());
+        model.addAttribute("pageTitle", "Usuń seans");
         return "deleteShowtimeList";
     }
 

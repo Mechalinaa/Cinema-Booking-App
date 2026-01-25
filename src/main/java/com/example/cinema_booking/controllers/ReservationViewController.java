@@ -22,6 +22,7 @@ public class ReservationViewController {
     public String reservationSummary(@PathVariable UUID id, Model model) {
         Reservation reservation = reservationService.findById(id);
         model.addAttribute("reservation", reservation);
+        model.addAttribute("pageTitle", "Rezerwacja");
         return "reservation";
     }
 }

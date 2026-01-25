@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edytuj Film</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 <h1>Edytuj film</h1>
 
-<form th:action="@{/admin/updateMovie}" th:object="${movie}" method="post">
+<form th:action="@{/admin/updateMovie}" th:object="${movie}" method="post" class="admin">
     <input type="hidden" th:field="*{id}"/>
 
     <div>
@@ -36,8 +34,10 @@
     </div>
 
     <div>
+        <br>
         <button type="submit">Zapisz zmiany</button>
     </div>
 </form>
+<a th:href="@{/admin}">← Powrót</a>
 </body>
 </html>

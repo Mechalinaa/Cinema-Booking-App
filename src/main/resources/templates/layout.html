@@ -1,29 +1,31 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="pl">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title th:text="${pageTitle} ?: 'Sigma Cinema'">Sigma Cinema</title>-->
-<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
-<!--</head>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl"
+      th:fragment="layout(content)">
 
-<!--<body>-->
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle} ?: 'Sigma Cinema'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
 
-<!--<header>Sigma Cinema</header>-->
+<body>
 
-<!--<div class="sidebar">-->
-<!--    <ul>-->
-<!--        <li><a href="/">Strona główna</a></li>-->
-<!--        <li><a href="/movies">Filmy</a></li>-->
-<!--        <li><a href="/showtimes">Seanse</a></li>-->
-<!--        <li><a href="/admin">Admin</a></li>-->
-<!--    </ul>-->
-<!--</div>-->
+<header>
+    <h1>Sigma Cinema</h1>
+    <nav>
+        <a th:href="@{/}">Strona główna</a>
+        <a th:href="@{/movies}">Filmy</a>
+        <a th:href="@{/showtimes}">Seanse</a>
+    </nav>
+</header>
 
-<!--<main>-->
-<!--    <div th:replace="${content}"></div>-->
-<!--</main>-->
+<main>
+    <div th:replace="${content}"></div>
+</main>
 
-<!--<footer>Michalina Łeńska</footer>-->
+<footer>
+    <p>© 2026 Sigma Cinema - Michalina Łeńska</p>
+</footer>
 
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>

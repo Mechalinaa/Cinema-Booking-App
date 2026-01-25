@@ -65,6 +65,7 @@ public class CartController {
 
         model.addAttribute("cart", cart);
         model.addAttribute("types", List.of("NORMALNY", "ULGOWY", "RODZINNY"));
+        model.addAttribute("pageTitle", "Koszyk");
         return "cart";
     }
 

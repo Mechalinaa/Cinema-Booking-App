@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj Film</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 <h1>Dodaj nowy film</h1>
 
-<form th:action="@{/admin/addMovie}" th:object="${movie}" method="post">
+<form th:action="@{/admin/addMovie}" th:object="${movie}" method="post" class="admin">
     <div>
         <label for="title">Tytuł:</label>
         <input type="text" id="title" th:field="*{title}" required/>
@@ -35,9 +32,10 @@
     </div>
 
     <div>
+        <br>
         <button type="submit">Dodaj film</button>
     </div>
 </form>
-
+<a th:href="@{/admin}">← Powrót</a>
 </body>
 </html>

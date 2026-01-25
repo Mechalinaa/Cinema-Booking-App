@@ -1,30 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Sigma Cinema</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
-
-<header>
-    <img th:src="@{/images/banner.png}" alt="banner" style="height: 400px">
-</header>
-
-<nav>
-    <a href="/movies">Filmy</a>
-    <a href="/showtimes">Wszystkie seanse</a>
-    <a href="/admin">Admin</a>
-</nav>
-
-<hr>
+<div class="home">
+    <div class="banner-container">
+        <img th:src="@{/images/banner.png}" alt="banner">
+    </div>
+</div>
 
 <h2>Repertuar</h2>
 
 <div>
     <a th:href="@{/(date=${selectedDate.minusDays(1)})}">←</a>
-
     <strong th:text="${selectedDate}"></strong>
-
     <a th:href="@{/(date=${selectedDate.plusDays(1)})}">→</a>
 </div>
 
@@ -35,8 +24,7 @@
 </div>
 
 <div th:each="entry : ${repertoire}">
-    <h3 th:text="${entry.key.title}">Tytuł filmu</h3>
-    <p th:text="${entry.key.genre}"></p>
+    <h3 th:text="${entry.key.title}"></h3>
 
     <div>
         <span th:each="show : ${entry.value}">

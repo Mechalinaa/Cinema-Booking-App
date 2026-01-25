@@ -26,6 +26,7 @@ public class ShowtimeViewController {
     @GetMapping("/showtimes")
     public String shows(Model model) {
         model.addAttribute("showtimes", showtimeService.findAll());
+        model.addAttribute("pageTitle", "Seanse");
         return "showtimes";
     }
 
@@ -46,6 +47,7 @@ public class ShowtimeViewController {
 
         model.addAttribute("show", show);
         model.addAttribute("seatsByRow", seatsByRow);
+        model.addAttribute("pageTitle", "Seans");
         return "show-details";
     }
 }

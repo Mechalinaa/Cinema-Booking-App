@@ -26,6 +26,7 @@ public class Movie {
     @Column(nullable = false)
     private int ageRestriction;
 
+    @Lob
     @Column(nullable = false)
     private String description;
 

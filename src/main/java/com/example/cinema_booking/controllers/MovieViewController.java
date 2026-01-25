@@ -14,6 +14,7 @@ public class MovieViewController {
     @GetMapping("/movies")
     public String moviesPage(Model model){
         model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("pageTitle", "Filmy");
         return "movies";
     }
 

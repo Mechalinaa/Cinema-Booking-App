@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edytuj Film</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 <h1>Wybierz film do edycji</h1>
 <ul>
     <li th:each="movie : ${movies}">
-        <span th:text="${movie.title} + ' (' + movie.genre + ')'"></span>
+        <span th:text="${movie.title}"></span>
         <a th:href="@{'/admin/updateMovie/' + ${movie.id}}">Edytuj</a>
     </li>
 </ul>
+<br>
+<a th:href="@{/admin}">← Powrót</a>
 </body>
 </html>

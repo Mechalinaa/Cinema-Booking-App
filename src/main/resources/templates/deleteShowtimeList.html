@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Usuń seans</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+
 <body>
 
 <h1>Usuń seans</h1>
@@ -36,7 +33,7 @@
 </table>
 
 <br>
-<a th:href="@{/showtimes}">← Powrót do listy seansów</a>
+<a th:href="@{/admin}">← Powrót</a>
 
 </body>
 </html>
