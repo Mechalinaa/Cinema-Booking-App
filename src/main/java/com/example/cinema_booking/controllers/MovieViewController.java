@@ -17,6 +17,4 @@ public class MovieViewController {
         model.addAttribute("pageTitle", "Filmy");
         return "movies";
     }
-
-
 }

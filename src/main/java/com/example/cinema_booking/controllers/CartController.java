@@ -102,7 +102,6 @@ public class CartController {
         return "redirect:/cart/view";
     }
 
-    // Potwierdzenie rezerwacji
     @PostMapping("/confirm")
     public String confirmReservation(HttpSession session) {
         CartDto cart = (CartDto) session.getAttribute("CART");
