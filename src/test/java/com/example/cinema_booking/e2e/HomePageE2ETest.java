@@ -10,7 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class HomePageE2ETest {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @BeforeAll
     void setUp() {
@@ -29,18 +34,22 @@ class HomePageE2ETest {
         options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     @AfterAll
     void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
     void shouldDisplayHomePageHappyPath() {
         driver.get("http://localhost:8080/");
 
-        assertEquals("Sigma Cinema", driver.getTitle());
+        WebElement repertuar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h2")));
+        assertEquals("Repertuar", repertuar.getText());
 
         WebElement header = driver.findElement(By.tagName("h1"));
         assertEquals("Sigma Cinema", header.getText());
@@ -49,10 +58,9 @@ class HomePageE2ETest {
         assertTrue(nav.getText().contains("Filmy"));
         assertTrue(nav.getText().contains("Seanse"));
 
-        WebElement repertuar = driver.findElement(By.tagName("h2"));
-        assertEquals("Repertuar", repertuar.getText());
-
         WebElement footer = driver.findElement(By.tagName("footer"));
         assertTrue(footer.getText().contains("Sigma Cinema"));
+
+        assertEquals("Sigma Cinema", driver.getTitle());
     }
 }

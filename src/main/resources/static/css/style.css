@@ -1,15 +1,11 @@
-/* ---------------------------
-   RESET
----------------------------- */
+/* --------------------------- RESET ---------------------------- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* ---------------------------
-   BODY I STRUKTURA
----------------------------- */
+/* --------------------------- BODY I STRUKTURA ---------------------------- */
 html, body {
     height: 100%;
 }
@@ -19,22 +15,19 @@ body {
     background: #ffe6f0;
     color: #4d0033;
     line-height: 1.6;
-
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* ---------------------------
-   HEADER
----------------------------- */
+/* --------------------------- HEADER ---------------------------- */
 header {
     width: 100%;
     background: linear-gradient(90deg, #ff99cc, #ff66b2);
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -42,9 +35,7 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* ---------------------------
-   NAV
----------------------------- */
+/* --------------------------- NAV ---------------------------- */
 nav {
     display: flex;
     justify-content: center;
@@ -65,9 +56,7 @@ nav a:hover {
     color: #4d0033;
 }
 
-/* ---------------------------
-   MAIN
----------------------------- */
+/* --------------------------- MAIN ---------------------------- */
 main {
     flex: 1;
     max-width: 1100px;
@@ -76,7 +65,7 @@ main {
     padding: 24px;
     background: #fff0f5;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -86,9 +75,7 @@ main > * {
     width: 100%;
 }
 
-/* ---------------------------
-   FOOTER
----------------------------- */
+/* --------------------------- FOOTER ---------------------------- */
 footer {
     text-align: center;
     padding: 15px 0;
@@ -98,17 +85,13 @@ footer {
     font-size: 0.9em;
 }
 
-/* ---------------------------
-   HEADINGS
----------------------------- */
+/* --------------------------- HEADINGS ---------------------------- */
 h1, h2, h3 {
     color: #99004d;
     margin-bottom: 12px;
 }
 
-/* ---------------------------
-   BUTTONS
----------------------------- */
+/* --------------------------- BUTTONS ---------------------------- */
 button {
     background: #ff66b2;
     color: #fff;
@@ -124,9 +107,7 @@ button:hover {
     background: #ff3385;
 }
 
-/* ---------------------------
-   LINKS
----------------------------- */
+/* --------------------------- LINKS ---------------------------- */
 a {
     color: #99004d;
     text-decoration: underline;
@@ -137,9 +118,7 @@ a:hover {
     color: #ff3385;
 }
 
-/* ---------------------------
-   TABLES
----------------------------- */
+/* --------------------------- TABLES ---------------------------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -160,9 +139,7 @@ tr:hover {
     background: #ffd6e6;
 }
 
-/* ---------------------------
-   🎀 ADMIN FORM (ODSEPAROWANE)
----------------------------- */
+/* --------------------------- 🎀 ADMIN FORM (ODSEPAROWANE) ---------------------------- */
 .admin {
     max-width: 600px;
     margin: 0 auto;
@@ -180,9 +157,7 @@ tr:hover {
     color: #99004d;
 }
 
-.admin input,
-.admin select,
-.admin textarea {
+.admin input, .admin select, .admin textarea {
     background: #ffffff;
     border: 2px solid #ff99cc;
     border-radius: 10px;
@@ -196,9 +171,7 @@ tr:hover {
     resize: vertical;
 }
 
-.admin input:focus,
-.admin select:focus,
-.admin textarea:focus {
+.admin input:focus, .admin select:focus, .admin textarea:focus {
     border-color: #ff3385;
     box-shadow: 0 0 8px rgba(255, 51, 133, 0.35);
     outline: none;
@@ -211,9 +184,7 @@ tr:hover {
     font-size: 15px;
 }
 
-/* ---------------------------
-   🎬 SHOW DETAILS (KINO)
----------------------------- */
+/* --------------------------- 🎬 SHOW DETAILS (KINO) ---------------------------- */
 .show-details .screen {
     max-width: 900px;
     margin: 0 auto 20px;
@@ -280,9 +251,7 @@ tr:hover {
     cursor: not-allowed;
 }
 
-/* ---------------------------
-   🖼 BANNER
----------------------------- */
+/* --------------------------- 🖼 BANNER ---------------------------- */
 .banner-container {
     max-width: 1100px;
     width: 100%;
@@ -298,9 +267,7 @@ tr:hover {
     border-radius: 10px;
 }
 
-/* ---------------------------
-   🧩 STRONA GŁÓWNA SEKCJE
----------------------------- */
+/* --------------------------- 🧩 STRONA GŁÓWNA SEKCJE ---------------------------- */
 #main {
     display: flex;
     justify-content: space-between;
@@ -314,7 +281,7 @@ tr:hover {
     padding: 20px;
     background: #fff0f5;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 #movies p, #showtimes p {

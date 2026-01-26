@@ -1,5 +1,6 @@
 package com.example.cinema_booking.controllers;
 
+import com.example.cinema_booking.dto.CartDto;
 import com.example.cinema_booking.models.*;
 import com.example.cinema_booking.repositories.*;
 import com.example.cinema_booking.services.ReservationService;
@@ -123,20 +124,33 @@ class CartControllerITest {
     @Test
     @WithMockUser
     void updateTicket_shouldChangeTypeAndPrice() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+
+        // najpierw dodajemy bilet do koszyka
         mockMvc.perform(post("/cart/add")
                         .with(csrf())
+                        .session(session)
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("seatIds", seat1.getId().toString())
                         .param("showtimeId", showtime.getId().toString()))
                 .andExpect(status().is3xxRedirection());
 
+        // teraz aktualizujemy typ biletu
         mockMvc.perform(post("/cart/updateTicket")
                         .with(csrf())
+                        .session(session)
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("seatId", seat1.getId().toString())
-                        .param("ticketType", "ULGOWY"))
+                        .param("type", "ULGOWY")) // <- nazwa parametru musi pasować do @RequestParam TicketType type
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/cart/view"));
+
+        // weryfikacja w sesji
+        CartDto cart = (CartDto) session.getAttribute("CART");
+        assertThat(cart).isNotNull();
+        assertThat(cart.getItems()).hasSize(1);
+        assertThat(cart.getItems().get(0).getTicketType()).isEqualTo("ULGOWY");
+        assertThat(cart.getItems().get(0).getPrice()).isEqualByComparingTo(BigDecimal.valueOf(18));
     }
 
     @Test

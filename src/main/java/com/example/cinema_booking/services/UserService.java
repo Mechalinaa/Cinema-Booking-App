@@ -1,5 +1,6 @@
-package com.example.cinema_booking.config;
+package com.example.cinema_booking.services;
 
+import com.example.cinema_booking.config.UserDetail;
 import com.example.cinema_booking.models.User;
 import com.example.cinema_booking.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
