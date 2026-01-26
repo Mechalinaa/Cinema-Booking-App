@@ -2,7 +2,9 @@ package com.example.cinema_booking.services;
 
 import com.example.cinema_booking.models.Cart;
 import com.example.cinema_booking.models.Reservation;
+import com.example.cinema_booking.models.ReservedSeat;
 import com.example.cinema_booking.repositories.ReservationRepository;
+import com.example.cinema_booking.repositories.ReservedSeatRepository;
 import com.example.cinema_booking.repositories.SeatRepository;
 import com.example.cinema_booking.repositories.ShowtimeRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,7 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ShowtimeRepository showtimeRepository;
-    private final SeatRepository seatRepository;
+    private final ReservedSeatRepository reservedSeatRepository;
 
     @Transactional(readOnly = true)
     public Reservation findById(UUID id){
@@ -27,6 +29,7 @@ public class ReservationService {
 
     @Transactional
     public Reservation createFromCart(Cart cart) {
+
         var showtime = showtimeRepository.findByIdOrElseThrow(cart.getShowtimeId());
 
         Reservation reservation = new Reservation();
@@ -39,11 +42,25 @@ public class ReservationService {
                 .filter(seat -> cart.getTickets().stream()
                         .anyMatch(t -> t.getSeatId().equals(seat.getId()))
                 )
-                .peek(seat -> {
-                    seat.setReserved(true);
-                    seatRepository.save(seat);
+                .map(seat -> {
+
+                    boolean taken = reservedSeatRepository
+                            .existsByShowtimeAndSeat(showtime, seat);
+
+                    if (taken) {
+                        throw new IllegalStateException(
+                                "Miejsce już zajęte: rząd " + seat.getRowNum() +
+                                        " miejsce " + seat.getSeatNum()
+                        );
+                    }
+
+                    ReservedSeat rs = new ReservedSeat();
+                    rs.setShowtime(showtime);
+                    rs.setSeat(seat);
+                    reservedSeatRepository.save(rs);
+
+                    return "Rząd " + seat.getRowNum() + ", miejsce " + seat.getSeatNum();
                 })
-                .map(seat -> "Rząd " + seat.getRowNum() + ", miejsce " + seat.getSeatNum())
                 .toList();
 
         reservation.setSeats(seats);

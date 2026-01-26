@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,8 +66,8 @@ class CartControllerITest {
     void setup() {
         reservationRepository.deleteAll();
         showtimeRepository.deleteAll();
-        roomRepository.deleteAll();
         seatRepository.deleteAll();
+        roomRepository.deleteAll();
         movieRepository.deleteAll();
 
         Movie movie = new Movie();
@@ -78,17 +79,21 @@ class CartControllerITest {
         movie.setGenre("Sci-Fi");
         movieRepository.save(movie);
 
+        Room room = new Room();
+        room.setName("Sala 1");
+
         seat1 = new Seat();
         seat1.setRowNum(1);
         seat1.setSeatNum(1);
+        seat1.setRoom(room);
 
         seat2 = new Seat();
         seat2.setRowNum(1);
         seat2.setSeatNum(2);
+        seat2.setRoom(room);
 
-        Room room = new Room();
-        room.setName("Sala 1");
-        room.setSeats(List.of(seat1, seat2)); // Hibernate zapisze seaty razem z Room
+        room.setSeats(new ArrayList<>(List.of(seat1, seat2)));
+
         roomRepository.save(room);
 
         showtime = new Showtime();
@@ -97,7 +102,6 @@ class CartControllerITest {
         showtime.setStartTime(LocalDateTime.now());
         showtimeRepository.save(showtime);
     }
-
     @Test
     @WithMockUser
     void addToCart_shouldAddSeatsAndRedirect() throws Exception {

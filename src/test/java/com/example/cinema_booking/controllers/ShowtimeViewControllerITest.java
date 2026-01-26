@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +55,8 @@ class ShowtimeViewControllerITest {
     @BeforeEach
     void setUp() {
         showtimeRepository.deleteAll();
-        roomRepository.deleteAll();
         seatRepository.deleteAll();
+        roomRepository.deleteAll();
         movieRepository.deleteAll();
 
         movie = new Movie();
@@ -67,17 +68,20 @@ class ShowtimeViewControllerITest {
         movie.setGenre("Sci-Fi");
         movieRepository.save(movie);
 
+        room = new Room();
+        room.setName("Sala 1");
+
         seat1 = new Seat();
         seat1.setRowNum(1);
         seat1.setSeatNum(1);
-
+        seat1.setRoom(room);
         seat2 = new Seat();
         seat2.setRowNum(1);
         seat2.setSeatNum(2);
+        seat2.setRoom(room);
 
-        room = new Room();
-        room.setName("Sala 1");
-        room.setSeats(List.of(seat1, seat2));
+        room.setSeats(new ArrayList<>(List.of(seat1, seat2)));
+
         roomRepository.save(room);
 
         showtime = new Showtime();

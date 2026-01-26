@@ -17,5 +17,8 @@ public class Seat {
     private UUID id;
     private int rowNum;
     private int seatNum;
-    private boolean reserved;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "room_id")
+    private Room room;
 }

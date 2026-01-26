@@ -24,31 +24,27 @@ class SeatRepositoryTest {
     @Autowired
     private RoomRepository roomRepository;
 
-    @Autowired
-    private ShowtimeRepository showtimeRepository;
-
     private Seat seat1;
     private Seat seat2;
     private Room room;
 
     @BeforeEach
     void setUp() {
-        showtimeRepository.deleteAll();
         seatRepository.deleteAll();
-        roomRepository.deleteAll();
+
+        room = new Room();
+        room.setName("Room A");
 
         seat1 = new Seat();
         seat1.setRowNum(1);
         seat1.setSeatNum(1);
-        seat1.setReserved(false);
+        seat1.setRoom(room);
 
         seat2 = new Seat();
         seat2.setRowNum(1);
         seat2.setSeatNum(2);
-        seat2.setReserved(true);
+        seat2.setRoom(room);
 
-        room = new Room();
-        room.setName("Room A");
         room.setSeats(new ArrayList<>(List.of(seat1, seat2)));
 
         roomRepository.save(room);
@@ -60,13 +56,16 @@ class SeatRepositoryTest {
         assertThat(found).isNotNull();
         assertThat(found.getRowNum()).isEqualTo(1);
         assertThat(found.getSeatNum()).isEqualTo(1);
+        assertThat(found.getRoom()).isEqualTo(room);
     }
 
     @Test
     void findByIdOrElseThrow_shouldReturnSeat() {
         Seat found = seatRepository.findByIdOrElseThrow(seat2.getId());
         assertThat(found).isNotNull();
-        assertThat(found.isReserved()).isTrue();
+        assertThat(found.getRowNum()).isEqualTo(1);
+        assertThat(found.getSeatNum()).isEqualTo(2);
+        assertThat(found.getRoom()).isEqualTo(room);
     }
 
     @Test

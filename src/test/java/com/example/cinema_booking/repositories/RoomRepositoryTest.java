@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import jakarta.persistence.EntityNotFoundException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +25,9 @@ class RoomRepositoryTest {
     @Autowired
     private ShowtimeRepository showtimeRepository;
 
+    @Autowired
+    private SeatRepository seatRepository;
+
     private Room room1;
     private Room room2;
 
@@ -30,14 +35,32 @@ class RoomRepositoryTest {
     void setUp() {
         showtimeRepository.deleteAll();
         roomRepository.deleteAll();
+        seatRepository.deleteAll();
 
         room1 = new Room();
         room1.setName("Sala 1");
-        room1.setSeats(List.of(new Seat(), new Seat()));
+
+        Seat room1Seat1 = new Seat();
+        room1Seat1.setRowNum(1);
+        room1Seat1.setSeatNum(1);
+        room1Seat1.setRoom(room1);
+
+        Seat room1Seat2 = new Seat();
+        room1Seat2.setRowNum(1);
+        room1Seat2.setSeatNum(2);
+        room1Seat2.setRoom(room1);
+
+        room1.setSeats(new ArrayList<>(List.of(room1Seat1, room1Seat2)));
 
         room2 = new Room();
         room2.setName("Sala 2");
-        room2.setSeats(List.of(new Seat()));
+
+        Seat room2Seat1 = new Seat();
+        room2Seat1.setRowNum(1);
+        room2Seat1.setSeatNum(1);
+        room2Seat1.setRoom(room2);
+
+        room2.setSeats(new ArrayList<>(List.of(room2Seat1)));
 
         roomRepository.saveAll(List.of(room1, room2));
     }

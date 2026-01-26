@@ -30,12 +30,14 @@ public class ShowtimeViewController {
 
     @GetMapping("/showtimes/{id}")
     public String showDetails(@PathVariable UUID id, Model model) {
+
         Showtime show = showtimeService.findById(id);
 
         Map<Integer, List<Seat>> seatsByRow = new LinkedHashMap<>();
         if (show.getRoom() != null && show.getRoom().getSeats() != null) {
             seatsByRow = show.getRoom().getSeats().stream()
-                    .sorted(Comparator.comparingInt(Seat::getRowNum).thenComparingInt(Seat::getSeatNum))
+                    .sorted(Comparator.comparingInt(Seat::getRowNum)
+                            .thenComparingInt(Seat::getSeatNum))
                     .collect(Collectors.groupingBy(
                             Seat::getRowNum,
                             LinkedHashMap::new,
@@ -43,9 +45,17 @@ public class ShowtimeViewController {
                     ));
         }
 
+        Set<UUID> takenSeatIds = show.getReservedSeats() == null
+                ? Collections.emptySet()
+                : show.getReservedSeats().stream()
+                .map(rs -> rs.getSeat().getId())
+                .collect(Collectors.toSet());
+
         model.addAttribute("show", show);
         model.addAttribute("seatsByRow", seatsByRow);
+        model.addAttribute("takenSeatIds", takenSeatIds); // ← KLUCZOWE
         model.addAttribute("pageTitle", "Seans");
+
         return "showDetails";
     }
 }

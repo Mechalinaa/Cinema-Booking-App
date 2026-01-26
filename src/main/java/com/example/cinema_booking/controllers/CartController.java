@@ -85,7 +85,6 @@ public class CartController {
         if (cartDto == null || cartDto.getItems().isEmpty())
             return "redirect:/cart/view";
 
-        // konwersja DTO → domain Cart (dla ReservationService)
         Cart cart = new Cart();
         cart.setShowtimeId(cartDto.getShowtimeId());
 

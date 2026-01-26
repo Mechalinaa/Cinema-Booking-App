@@ -35,12 +35,14 @@
 
                 <div class="seats">
                     <label th:each="seat : ${rowEntry.value}"
-                           th:class="'seat-box ' + (${seat.reserved} ? 'taken' : 'available')"
+                           th:class="'seat-box ' + (${takenSeatIds.contains(seat.id)} ? 'taken' : 'available')"
                            th:title="'Rząd ' + ${seat.rowNum} + ', miejsce ' + ${seat.seatNum}">
+
                         <input type="checkbox"
                                name="seatIds"
                                th:value="${seat.id}"
-                               th:disabled="${seat.reserved}" />
+                               th:disabled="${takenSeatIds.contains(seat.id)}" />
+
                         <span class="seat" th:text="${seat.seatNum}"></span>
                     </label>
                 </div>

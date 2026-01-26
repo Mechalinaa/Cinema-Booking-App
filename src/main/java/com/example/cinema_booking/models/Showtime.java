@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,4 +29,7 @@ public class Showtime {
 
     @Column(nullable = false)
     private LocalDateTime startTime;
+
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
+    private List<ReservedSeat> reservedSeats;
 }
