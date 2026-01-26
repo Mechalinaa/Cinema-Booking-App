@@ -20,9 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class AdminControllerIT {
+class AdminControllerITest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -200,4 +201,87 @@ class AdminControllerIT {
 
         assertThat(showtimeRepository.existsById(showtime.getId())).isFalse();
     }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void addMovieForm_shouldReturnAddMovieView() throws Exception {
+        mockMvc.perform(get("/admin/addMovie"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("addMovie"))
+                .andExpect(model().attributeExists("pageTitle"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void updateMovieList_shouldReturnViewWithMovies() throws Exception {
+        mockMvc.perform(get("/admin/updateMovie"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("updateMovieList"))
+                .andExpect(model().attributeExists("movies"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void editMovieForm_shouldReturnEditView() throws Exception {
+        Movie movie = new Movie();
+        movie.setTitle("Test");
+        movie.setGenre("Test");
+        movie.setDirector("Test Director");
+        movie.setDescription("Opis");
+        movie.setAgeRestriction(12);
+        movie.setDurationInMinutes(120);
+
+        movie = movieRepository.save(movie);
+
+        mockMvc.perform(get("/admin/updateMovie/" + movie.getId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("updateMovieForm"))
+                .andExpect(model().attributeExists("movie"))
+                .andExpect(model().attribute("movie",
+                        hasProperty("id", is(movie.getId()))
+                ));
+    }
+
+
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void deleteMovieList_shouldReturnView() throws Exception {
+        mockMvc.perform(get("/admin/deleteMovie"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("deleteMovieList"))
+                .andExpect(model().attributeExists("movies"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void addShowtimeForm_shouldReturnView() throws Exception {
+        mockMvc.perform(get("/admin/addShowtime"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("addShowtime"))
+                .andExpect(model().attributeExists("movies"))
+                .andExpect(model().attributeExists("rooms"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void showtimeList_shouldReturnView() throws Exception {
+        mockMvc.perform(get("/admin/deleteShowtime"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("deleteShowtimeList"))
+                .andExpect(model().attributeExists("showtimes"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void addShowtime_shouldReturnFormOnValidationError() throws Exception {
+        mockMvc.perform(post("/admin/addShowtime")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().isOk())
+                .andExpect(view().name("addShowtime"))
+                .andExpect(model().attributeExists("error"));
+    }
+
 }

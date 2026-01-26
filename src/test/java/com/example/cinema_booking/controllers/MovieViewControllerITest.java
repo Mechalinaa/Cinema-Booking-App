@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test") // Profil H2
-class MovieViewControllerIT {
+class MovieViewControllerITest {
 
     @Autowired
     private MockMvc mockMvc;
